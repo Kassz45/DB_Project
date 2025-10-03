@@ -1,0 +1,41 @@
+import requests
+import json
+import numpy as np
+
+url = "https://rzgvm7berb.execute-api.us-east-2.amazonaws.com/v1/stem/part/list"
+
+payload = json.dumps({})
+headers = {
+  'Content-Type': 'application/json',
+  'x-api-key': '2EaV4TCvN882WaBndRn6o4eruaKWvvx73FjJRICa'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+data = response.json()
+with open("part_list_data.json", "w") as file:
+    json.dump(data, file)
+
+print("Data stored successfully!")
+from numpy.dtypes import StringDType
+def part_count(file_path, key):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+        if key in data:
+            return data[key]
+        else:
+            return None
+file_path = 'part_list_data.json'
+key_to_read = 'result_count'
+
+result = part_count(file_path, key_to_read)
+count = int(result)
+list_ids = np.empty([count],dtype=StringDType())
+def id_list(file_path, key,list,count):
+    for i in range(count):
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+            list[i]= data[key][i]['part']['name']
+    return list
+list_ids = id_list(file_path,'results',list_ids,count)
+
+print(list_ids)
