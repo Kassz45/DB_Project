@@ -1,0 +1,64 @@
+
+SELECT course_name from Course
+
+SELECT student_number From Grade_Report Where grade='A'
+SELECT course_name, course_number, section_id
+From Course, Grade_Report;
+
+
+INSERT INTO Student (Name,Student_Number,Class,Major) VALUES (
+'Kate',
+'2',
+'105',
+'CS'
+);
+
+
+--- 22-03-2024 17:43:57
+--- SQLite.1
+INSERT INTO Grade_Report (Student_number,Section_ID,grade) VALUES (
+'2',
+'9301',
+'B');
+
+
+SELECT name from Student, Course JOIN Grade_Report 
+WHERE course_name='Intro to Database Systems' and section_id=9301;
+
+-
+SELECT * FROM Section
+ORDER by instructor DESC;
+
+--- 22-03-2024 18:13:20
+--- SQLite.1
+
+SELECT instructor FROM Section
+ORDER by instructor DESC;
+
+--- 22-03-2024 18:14:57
+--- SQLite.1
+
+SELECT DISTINCT instructor FROM Section
+ORDER by instructor DESC;
+
+
+
+SELECT name from Grade_Report JOIN Student
+WHERE grade in( NOT NULL);
+
+
+ALTER TABLE Section ADD COLUMN Max Enrollment INTEGER NOT NULL DEFAULT '40';
+
+
+INSERT INTO Student (Name,Student_Number,Class,Major) VALUES (
+  'Blake',
+  '3',
+  '67',
+  'Math'
+); 
+
+
+SELECT * from (Student LEFT OUTER JOIN Grade_Report) 
+WHERE grade = NOT NULL;
+
+

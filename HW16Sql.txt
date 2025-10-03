@@ -1,0 +1,82 @@
+CREATE TABLE Student
+(Name varchar(15) ,
+ Student_Number int ,
+ Class int,
+ Major varchar(5),
+FOREIGN KEY (Student_number) REFERENCES Grade_Report(Student_number));
+CREATE TABLE Grade_Report
+(Student_number int,
+ Section_ID int,
+ Grade varchar(1),
+ PRIMARY KEY (Student_number),
+ FOREIGN KEY (Section_ID) REFERENCES Section(Section_ID));
+ create table Section
+ (Section_ID int,
+  Course_Number varchar(15),
+  Semester varchar(6),
+  Year,
+  Instructor varchar(15),
+  PRIMARY KEY (Section_ID),
+  FOREIGN KEY (Course_Number) REFERENCES Course(Course_Number));
+  Create Table Course
+  (Course_Name varchar(130),
+   Course_Number varchar(15),
+   Credit_Hours int,
+   Department varchar(2),
+   PRIMARY KEY (Course_Number));
+   Create table Prerequisite
+   (Course_Number varchar(130),
+    Prerequisite_Number varchar(130),
+    FOREIGN KEY (Course_Number) REFERENCES Course(Course_Number),
+    FOREIGN KEY (Prerequisite_Number) REFERENCES Course(Course_Number));
+
+
+INSERT INTO Course (Course_Name,Course_Number,Credit_Hours,Department) VALUES (
+  'Intro to Database Systems',
+  'CSE3241',
+  '3',
+  'CS'
+); 
+INSERT INTO Prerequisite (Course_Number,Prerequisite_Number) VALUES (
+  'CSE3241',
+  'CSE2231'
+); 
+INSERT INTO Section (Section_ID,Course_Number,Semester,Year,Instructor) VALUES (
+  '9301',
+  'CSE3241',
+  'Spring',
+  '2024',
+  'Pichkar'
+); 
+INSERT INTO Section (Section_ID,Course_Number,Semester,Year,Instructor) VALUES (
+  '9302',
+  'CSE3241',
+  'Spring',
+  '2024',
+  'Pichkar'
+); 
+INSERT INTO Course (Course_Name,Course_Number,Credit_Hours,Department) VALUES (
+  'Software II',
+  'CSE2231',
+  '3',
+  'CS'
+); 
+
+DELETE From Section WHERE year like "2023";
+
+
+INSERT INTO Student (Name,Student_Number,Class,Major) VALUES (
+  'Ibrahim',
+  '1',
+  '23',
+  'CS'
+); 
+
+INSERT INTO Grade_Report (Student_number,Section_ID) VALUES (
+  '1',
+  '9301'
+); 
+
+UPDATE Grade_Report
+ Set grade = 'A'
+ WHERE student_number = 1;
